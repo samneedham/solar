@@ -7,6 +7,16 @@ from .models import SQLModel, Lead
 app = FastAPI()
 SQLModel.metadata.create_all(engine)
 
+# Responds to GET / with 200 OK
+@app.get("/", include_in_schema=False)
+def root():
+    return {"status": "ok"}
+
+# Responds to GET /healthz with 200 OK
+@app.get("/healthz", include_in_schema=False)
+def healthz():
+    return {"ok": True}
+
 def save_lead(data: dict, session: Session):
     lead = Lead(**data)
     session.add(lead)
