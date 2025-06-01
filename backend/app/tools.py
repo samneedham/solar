@@ -21,4 +21,4 @@ def create_lead(lead: LeadIn) -> str:
     Instead, when the agent calls create_lead(...),
     our backend intercepts and does the actual persistence.
     """
-    return "lead_saved"
+    re
