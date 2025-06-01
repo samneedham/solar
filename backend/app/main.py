@@ -23,8 +23,10 @@ async def chat(ws: WebSocket, session: Session = Depends(get_session)):
 
         agent_msg = lead_agent.run(history)
 
+        # inside chat() loop
         if agent_msg.tool_call and agent_msg.tool_call.name == "create_lead":
-            save_lead(agent_msg.tool_call.args, session)
+            lead_payload = agent_msg.tool_call.args["lead"]
+            save_lead(lead_payload, session)
             agent_msg = agent_msg.confirm(
                 "Great – we've sent your spec for quoting. Expect prices soon!"
             )
