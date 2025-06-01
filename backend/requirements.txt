@@ -1,4 +1,4 @@
-openai-agents>=0.6.0
+openai-agents==0.0.16
 fastapi
 uvicorn[standard]
 sqlmodel
