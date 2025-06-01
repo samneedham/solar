@@ -1,7 +1,5 @@
-# backend/app/tools.py
 from agents import function_tool
 from pydantic import BaseModel, EmailStr, Field
-
 
 class LeadIn(BaseModel):
     name: str | None
@@ -9,10 +7,9 @@ class LeadIn(BaseModel):
     postcode: str = Field(
         ...,
         pattern=r"[A-Z]{1,2}\d{1,2}[A-Z]?\s*\d[A-Z]{2}",
-        description="UK postcode",
+        description="UK postcode (e.g. SW1A 1AA)",
     )
-    product_type: str
-
+    product_type: str  # e.g. "residential solar", "solar + battery", etc.
 
 @function_tool(
     name_override="create_lead",
@@ -20,8 +17,8 @@ class LeadIn(BaseModel):
 )
 def create_lead(lead: LeadIn) -> str:
     """
-    This gets called by the agent when it has gathered everything it needs for a sales lead.
-    The web-server (main.py) will intercept the call and store lead data in Postgres.
+    This function does not itself save to the database.
+    Instead, when the agent calls create_lead(...),
+    our backend intercepts and does the actual persistence.
     """
-    # We never write to the database here; main.py will handle persistence.
-    return "lead_saved"
+    re

@@ -1,13 +1,15 @@
-# backend/app/config.py
 import os
 from dotenv import load_dotenv
 
-load_dotenv()  # load .env if present
+load_dotenv()  # load .env from your build context
 
-# Read our OpenAI key (if you need it elsewhere) and the DATABASE_URL from env
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "sqlite:///./leads.db"  # fallback if not set
+)
 
-# Render often gives a DATABASE_URL that starts with "postgres://"
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./leads.db")
-if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+# If Render (or some other host) gave you a "postgres://" URL,
+# SQLAlchemy expects "postgresql://"
+if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
