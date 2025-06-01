@@ -1,10 +1,14 @@
-# models.py ---------------------------------------------------
+from typing import Optional
 from sqlmodel import SQLModel, Field
+from sqlalchemy import Column, JSON
 
 class Lead(SQLModel, table=True):
-    id: int | None = Field(default=None, primary_key=True)
-    name: str | None
+    id: Optional[int] = Field(default=None, primary_key=True)
+    name: Optional[str] = None
     email: str
     postcode: str
     product_type: str
-    key_specs: dict | None = {}
+    key_specs: dict | None = Field(
+        default_factory=dict,
+        sa_column=Column(JSON),
+    )

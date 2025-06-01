@@ -7,8 +7,4 @@ bid_agent = Agent(
     instructions="Given a lead JSON, return a total installed price in GBP.",
     model="gpt-4o-mini",
     model_settings=ModelSettings(
-        temperature=0,        # deterministic
-        # tool_choice="auto",  # default, omit if fine
-    ),
-    tools=[price_sheet],
-)
+    
