@@ -18,8 +18,6 @@ class LeadIn(BaseModel):
 )
 def create_lead(lead: LeadIn) -> str:
     """
-    This gets called by the agent; our FastAPI server intercepts the call
-    and stores lead data in Postgres. The body here can stay empty because
-    we do the actual saving inside main.py.
+    This will be intercepted by main.py; the function body can stay empty.
     """
     return "lead_saved"
