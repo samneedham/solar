@@ -1,6 +1,6 @@
 # backend/app/lead_agent.py
-from agents import Agent
-from .tools import create_lead          # ← now the decorated function
+from agents import Agent, ModelSettings
+from .tools import create_lead      # decorated with @function_tool
 
 lead_agent = Agent(
     name="Lead-Collector",
@@ -8,6 +8,9 @@ lead_agent = Agent(
         "You are a friendly assistant matching homeowners with installers. "
         "Ask as few questions as possible to fill the create_lead tool."
     ),
-    tools=[create_lead],                # list of function_tools
-    model_config={"model": "gpt-4o-mini"},
+    model="gpt-4o-mini",
+    model_settings=ModelSettings(
+        temperature=0.5,      # a bit of creativity
+    ),
+    tools=[create_lead],
 )
