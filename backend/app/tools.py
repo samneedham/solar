@@ -11,7 +11,6 @@ class LeadIn(BaseModel):
         description="UK postcode",
     )
     product_type: str
-    key_specs: dict = {}
 
 # The function body can be empty; we persist the lead server-side.
 @function_tool(
