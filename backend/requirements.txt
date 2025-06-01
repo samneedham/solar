@@ -1,5 +1,4 @@
-openai>=1.82.1          # May 29 2025  [oai_citation:0‡PyPI](https://pypi.org/project/openai/?utm_source=chatgpt.com)
-openai-agents-python>=0.6.0  # latest Agents SDK  [oai_citation:1‡OpenAI](https://openai.github.io/openai-agents-python/?utm_source=chatgpt.com)
+openai-agents>=0.6.0
 fastapi
 uvicorn[standard]
 sqlmodel
