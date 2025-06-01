@@ -1,3 +1,4 @@
+# backend/app/models.py
 from typing import Optional
 from sqlmodel import SQLModel, Field
 from sqlalchemy import Column, JSON
