@@ -31,4 +31,5 @@ async def chat(ws: WebSocket, session: Session = Depends(get_session)):
                 "Great – we've sent your spec for quoting. Expect prices soon!"
             )
 
-        hist
+        history.append(agent_msg.to_dict())
+        await ws.send_text(agent_msg.content)

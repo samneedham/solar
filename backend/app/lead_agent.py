@@ -9,3 +9,8 @@ lead_agent = Agent(
         "Ask as few questions as possible to fill the create_lead tool."
     ),
     model="gpt-4o-mini",
+    model_settings=ModelSettings(
+        temperature=0.5,      # a bit of creativity
+    ),
+    tools=[create_lead],
+)

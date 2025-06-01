@@ -12,4 +12,14 @@ class LeadIn(BaseModel):
     )
     product_type: str
 
-# The function body can be empty; we persist the lead server-
+# The function body can be empty; we persist the lead server-side.
+@function_tool(
+    name_override="create_lead",
+    description_override="Save a qualified lead to the CRM."
+)
+def create_lead(lead: LeadIn) -> str:        
+    """
+    This gets called by the agent; the web-server intercepts the call
+    and stores lead data in Postgres.
+    """
+    return "lead_saved"
