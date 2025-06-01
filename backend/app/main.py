@@ -1,0 +1,33 @@
+from fastapi import FastAPI, WebSocket, Depends
+from sqlmodel import Session
+from .lead_agent import lead_agent
+from .db import engine, get_session
+from .models import SQLModel, Lead
+
+app = FastAPI()
+SQLModel.metadata.create_all(engine)
+
+def save_lead(data: dict, session: Session):
+    lead = Lead(**data)
+    session.add(lead)
+    session.commit()
+    return lead
+
+@app.websocket("/chat")
+async def chat(ws: WebSocket, session: Session = Depends(get_session)):
+    await ws.accept()
+    history = []
+    while True:
+        user_msg = await ws.receive_text()
+        history.append({"role": "user", "content": user_msg})
+
+        agent_msg = lead_agent.run(history)
+
+        if agent_msg.tool_call and agent_msg.tool_call.name == "create_lead":
+            save_lead(agent_msg.tool_call.args, session)
+            agent_msg = agent_msg.confirm(
+                "Great – we've sent your spec for quoting. Expect prices soon!"
+            )
+
+        history.append(agent_msg.to_dict())
+        await ws.send_text(agent_msg.content)
