@@ -16,8 +16,8 @@ lead_agent = Agent(
     ),
     model="gpt-4o-mini",
     model_settings=ModelSettings(
-        temperature=0.5,  # a bit of creativity when explaining solar
-        # tool_choice="auto",  # default is fine
+        temperature=0.5,  # mid creativity when explaining solar
+        # tool_choice="auto",  # not sure
     ),
     tools=[create_lead],
 )

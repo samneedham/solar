@@ -1,5 +1,5 @@
 from agents import Agent, ModelSettings
-from .tools import price_sheet  # assume you have a price_sheet tool elsewhere
+from .tools import price_sheet  # assuming have a price_sheet tool elsewhere (actually OpenSolar)
 
 bid_agent = Agent(
     name="Bid-Assistant",

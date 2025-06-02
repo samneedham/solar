@@ -36,7 +36,7 @@ async def chat(ws: WebSocket, session: Session = Depends(get_session)):
             # Run the Lead‐Collector agent
             result = await Runner.run(lead_agent, history)
 
-            # Look for any ToolCallItem whose raw["name"] == "create_lead"
+            # Look for any ToolCallItem whose raw["name"] == "create_lead" not sure
             created_a_lead = False
             for item in result.new_items:
                 if isinstance(item, ToolCallItem) and item.raw.get("name") == "create_lead":

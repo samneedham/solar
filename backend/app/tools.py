@@ -9,7 +9,7 @@ class LeadIn(BaseModel):
         pattern=r"[A-Z]{1,2}\d{1,2}[A-Z]?\s*\d[A-Z]{2}",
         description="UK postcode (e.g. SW1A 1AA)",
     )
-    product_type: str  # e.g. "residential solar", "solar + battery", etc.
+    product_type: str  # e.g. "residential solar", "solar + battery", maybe can just create its own reason (as we used to do)
 
 @function_tool(
     name_override="create_lead",
